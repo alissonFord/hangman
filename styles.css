@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1, h2, h3 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#letters {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px;
+    margin: 10px;
+}
