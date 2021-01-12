@@ -22,6 +22,11 @@ button {
 }
 
 #word {
-    margin-left: 45%;
-    padding: 30px 20px;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px
+}
+
+#word span {
+    margin: 10px;
 }
