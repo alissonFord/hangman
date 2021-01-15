@@ -65,3 +65,8 @@ button:hover {
     font-size: 2rem;
     margin-bottom: 20px;
 }
+
+#hangman {
+    display: block;
+    margin: 0 auto;
+}

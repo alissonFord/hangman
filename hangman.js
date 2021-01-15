@@ -1,9 +1,11 @@
 const alphabet = document.getElementById('letters');
 const word = document.getElementById('word');
 const buttons = document.getElementsByClassName('btn');
-console.log(buttons);
 const attempt = document.getElementById('attempt');
 const status = document.getElementById('status');
+
+const hangman = document.getElementById('hangman');
+const ctx = hangman.getContext("2d");
 
 var secretWord;
 var guessedLetters;
@@ -82,13 +84,6 @@ function checkCounter() {
     }
 }
 
-function resetData() {
-    secretWord = '';
-    guessedLetters = [];
-    wordStatus = null;
-    counter = 10;
-}
-
 function isWordGuessed() {
     if (wordStatus.indexOf(' _ ') < 0) {
         status.innerHTML =
@@ -102,8 +97,80 @@ function isWordGuessed() {
     }
 }
 
+function hangmanContext() {
+    ctx.beginPath();
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = 'black';
+}
+
+function drawRope() {
+    ctx.moveTo(220, 80);
+    ctx.lineTo(220, 120);
+    ctx.stroke();
+}
+
+function drawCrossbeam() {
+    ctx.moveTo(100, 80);
+    ctx.lineTo(220,80);
+    ctx.stroke();
+}
+
+function drawUpright() {
+    ctx.moveTo(100, 450);
+    ctx.lineTo(100, 80);
+    ctx.stroke();
+}
+
+function drawBase() {
+    ctx.moveTo(50,450);
+    ctx.lineTo(350,450);
+}
+
+function drawHead() {
+    ctx.beginPath();
+    ctx.arc(220, 150, 30, 0, Math.PI*2, true);
+    ctx.stroke();
+}
+
+function drawCorpse() {
+    ctx.moveTo(220, 180);
+    ctx.lineTo(220, 320);
+    ctx.stroke();
+}
+
+function drawLeftArm() {
+    ctx.moveTo(220, 200);
+    ctx.lineTo(190, 280);
+    ctx.stroke();
+}
+
+function drawRightArm() {
+    ctx.moveTo(220, 200);
+    ctx.lineTo(250, 280);
+    ctx.stroke();
+}
+
+function drawLeftLeg() {
+    ctx.moveTo(220, 320);
+    ctx.lineTo(180, 400);
+    ctx.stroke();
+}
+
+function drawRightLeg() {
+    ctx.moveTo(220, 320);
+    ctx.lineTo(260, 400);
+    ctx.stroke();
+}
+
 function clearStatus() {
     status.innerHTML = '';
+}
+
+function resetData() {
+    secretWord = '';
+    guessedLetters = [];
+    wordStatus = null;
+    counter = 10;
 }
 
 function playAgain() {
@@ -116,6 +183,17 @@ function playGame() {
     displayLetters();
     pickSecretWord();
     getSecretLetter();
+    hangmanContext();
+    drawBase();
+    drawUpright();
+    drawCrossbeam();
+    drawRope();
+    drawHead();
+    drawCorpse();
+    drawLeftArm();
+    drawRightArm();
+    drawLeftLeg();
+    drawRightLeg();
 }
 
 playGame();
