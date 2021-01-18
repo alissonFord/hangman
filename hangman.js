@@ -1,7 +1,6 @@
 const alphabet = document.getElementById('letters');
 const word = document.getElementById('word');
 const buttons = document.getElementsByClassName('btn');
-const attempt = document.getElementById('attempt');
 const status = document.getElementById('status');
 
 const hangman = document.getElementById('hangman');
@@ -66,8 +65,8 @@ function checkLetter(chosenLetter) {
     else {
         counter -= 1;
         checkCounter();
-        console.log(counter);
-        attempt.innerHTML = counter;
+        console.log('counter: ' + counter);
+        drawHangman();
     }
 }
 
@@ -97,6 +96,45 @@ function isWordGuessed() {
     }
 }
 
+function drawHangman() {
+    console.log('drawHangman()');
+    switch(counter) {
+        case 9:
+            console.log('counter === 9');
+            drawBase();
+            break;
+        case 8:
+            drawUpright();
+            break;
+        case 7:
+            drawCrossbeam();
+            break;
+        case 6:
+            drawRope();
+            break;
+        case 5:
+            drawHead();
+            break;
+        case 4:
+            drawBody();
+            break;
+        case 3:
+            drawLeftArm();
+            break;
+        case 2:
+            drawRightArm();
+            break;
+        case 1:
+            drawLeftLeg();
+            break;
+        case 0:
+            drawRightLeg();
+            break;
+        default:
+            break;
+    }
+}
+
 function hangmanContext() {
     ctx.beginPath();
     ctx.lineWidth = 3;
@@ -122,8 +160,10 @@ function drawUpright() {
 }
 
 function drawBase() {
+    console.log("drawBase");
     ctx.moveTo(50,450);
     ctx.lineTo(350,450);
+    ctx.stroke();
 }
 
 function drawHead() {
@@ -132,7 +172,7 @@ function drawHead() {
     ctx.stroke();
 }
 
-function drawCorpse() {
+function drawBody() {
     ctx.moveTo(220, 180);
     ctx.lineTo(220, 320);
     ctx.stroke();
@@ -171,6 +211,7 @@ function resetData() {
     guessedLetters = [];
     wordStatus = null;
     counter = 10;
+    ctx.clearRect(0, 0, hangman.width, hangman.height);
 }
 
 function playAgain() {
@@ -184,16 +225,6 @@ function playGame() {
     pickSecretWord();
     getSecretLetter();
     hangmanContext();
-    drawBase();
-    drawUpright();
-    drawCrossbeam();
-    drawRope();
-    drawHead();
-    drawCorpse();
-    drawLeftArm();
-    drawRightArm();
-    drawLeftLeg();
-    drawRightLeg();
 }
 
 playGame();
